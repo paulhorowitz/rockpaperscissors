@@ -12,6 +12,9 @@ function computerPlay() {
 
 function round(playerSelection, computerSelection) {
 
+    playerChoiceElement = document.getElementById("player-choice")
+    computerChoiceElement = document.getElementById("computer-choice")
+    playerChoiceElement.innerHTML = "You have chosen " + playerSelection;
     console.log(`Your choice was ${playerSelection}`)
     console.log(`The computers choice was ${computerSelection}`)
     if (computerSelection === "rock") {
@@ -58,11 +61,6 @@ function round(playerSelection, computerSelection) {
 }
 
 function game() {
-    for (i=0; i<5; i++) {
-        response = prompt("Enter Rock, Paper or Scissors");
-        response = response.toLowerCase()
-        round(response, computerPlay())
-    }
     if (computerScore > playerScore) {
         console.log(`Computer wins the game ${computerScore} to ${playerScore}`)
     }
@@ -74,6 +72,27 @@ function game() {
         console.log(`You win the game!! ${playerScore} to ${computerScore}!! Well done!!`)
     }
 }
+
+function playerPress () {
+    const rock = document.getElementById("rock");
+    const paper = document.getElementById("paper");
+    const scissors = document.getElementById("scissors");
+    rock.addEventListener('click', () => {
+        playerSelection = "rock";
+        computerPlay()
+        round(playerSelection, compResult)
+    });
+    paper.addEventListener('click', () => {
+        playerSelection = "paper";
+        computerPlay()
+        round(playerSelection, compResult)
+    });
+    scissors.addEventListener('click', () => {
+        playerSelection = "scissors";
+        computerPlay()
+        round(playerSelection, compResult)
+    })
+}
 computerScore = 0
 playerScore = 0
-game()
+playerPress()
