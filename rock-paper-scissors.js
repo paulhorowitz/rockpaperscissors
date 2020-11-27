@@ -7,57 +7,66 @@ function computerPlay() {
         compResult = "scissors";
     }
     else compResult = "paper";
+    console.log(compResult)
     return compResult;
 }
 
 function round(playerSelection, computerSelection) {
 
-    playerChoiceElement = document.getElementById("player-choice")
-    computerChoiceElement = document.getElementById("computer-choice")
+    playerChoiceElement = document.getElementById("player-choice");
+    computerChoiceElement = document.getElementById("computer-choice");
+    outcomeElement = document.getElementById("outcome");
     playerChoiceElement.innerHTML = "You have chosen " + playerSelection;
+    playerChoiceElement.style.color = "#BADA55";
+    let delayInMilliseconds = 1000;
+    setTimeout (function() {
+        computerChoiceElement.innerHTML = "The computer has chosen " + computerSelection;
+    }, delayInMilliseconds);
     console.log(`Your choice was ${playerSelection}`)
     console.log(`The computers choice was ${computerSelection}`)
-    if (computerSelection === "rock") {
-        if (playerSelection === "rock") {
-            console.log("It's a tie!");
-        }
-        else if (playerSelection === "scissors") {
-            console.log("You lose. Rock beats Scissors :-( ");
-            computerScore += 1;
-        }
-        else if (playerSelection === "paper") {
-            console.log("You win!! Paper beats Rock!! Hooray!!")
-            playerScore += 1;
-        }
-    }
+    setTimeout (function() {
+        if (computerSelection === "rock") {
+            if (playerSelection === "rock") {
+                outcomeElement.innerHTML = "It's a tie!";
+            }
+            else if (playerSelection === "scissors") {
+                coutcomeElement.innerHTML ="You lose. Rock beats Scissors :-( ";
+                computerScore += 1;
+            }
+            else if (playerSelection === "paper") {
+                outcomeElement.innerHTML ="You win!! Paper beats Rock!! Hooray!!"
+                playerScore += 1;
+            }
 
-    else if (computerSelection === "paper") {
-        if (playerSelection === "rock") {
-            console.log("You lose. Paper beats Rock. :-(")
-            computerScore += 1;
         }
-        else if (playerSelection === "paper") {
-            console.log("It's a tie!")
+        else if (computerSelection === "paper") {
+            if (playerSelection === "rock") {
+                outcomeElement.innerHTML = "You lose. Paper beats Rock. :-(";
+                computerScore += 1;
+            }
+            else if (playerSelection === "paper") {
+                outcomeElement.innerHTML ="It's a tie!"
+            }
+            else if (playerSelection == "scissors") {
+                outcomeElement.innerHTML ="You win!! Scissors beats Paper!! Hooray!!";
+                playerScore += 1;
+            }
         }
-        else if (playerSelection == "scissors") {
-            console.log("You win!! Scissors beats Paper!! Hooray!!");
-            playerScore += 1;
-        }
-    }
 
-    else if (computerSelection === "scissors") {
-        if (playerSelection === "rock") {
-            console.log("You win!! Rock beats Scissors!! Hooray!!")
-            playerScore += 1;
+        else if (computerSelection === "scissors") {
+            if (playerSelection === "rock") {
+                outcomeElement.innerHTML = "You win!! Rock beats Scissors!! Hooray!!";
+                playerScore += 1;
+            }
+            else if (playerSelection === "paper") {
+                outcomeElement.innerHTML ="You lose. Scissors beats Paper :-("
+                computerScore += 1;
+            }
+            else if (playerSelection == "scissors") {
+                outcomeElement.innerHTML ="It's a tie!"
+            }
         }
-        else if (playerSelection === "paper") {
-            console.log("You lose. Scissors beats Paper :-(")
-            computerScore += 1;
-        }
-        else if (playerSelection == "scissors") {
-            console.log("It's a tie!")
-        }
-    }
+    },2000)
 }
 
 function game() {
@@ -85,6 +94,7 @@ function playerPress () {
     paper.addEventListener('click', () => {
         playerSelection = "paper";
         computerPlay()
+        console.log(compResult)
         round(playerSelection, compResult)
     });
     scissors.addEventListener('click', () => {
