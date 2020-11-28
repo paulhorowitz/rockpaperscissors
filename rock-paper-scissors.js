@@ -7,7 +7,6 @@ function computerPlay() {
         compResult = "scissors";
     }
     else compResult = "paper";
-    console.log(compResult)
     return compResult;
 }
 
@@ -19,6 +18,7 @@ function round(playerSelection, computerSelection) {
     playerChoiceElement.innerHTML = "You have chosen " + playerSelection;
     playerChoiceElement.style.color = "#BADA55";
     let delayInMilliseconds = 1000;
+    scoreElement = document.getElementById("score-element")
     setTimeout (function() {
         computerChoiceElement.innerHTML = "The computer has chosen " + computerSelection;
     }, delayInMilliseconds);
@@ -30,14 +30,13 @@ function round(playerSelection, computerSelection) {
                 outcomeElement.innerHTML = "It's a tie!";
             }
             else if (playerSelection === "scissors") {
-                coutcomeElement.innerHTML ="You lose. Rock beats Scissors :-( ";
+                outcomeElement.innerHTML ="You lose. Rock beats Scissors :-( ";
                 computerScore += 1;
             }
             else if (playerSelection === "paper") {
                 outcomeElement.innerHTML ="You win!! Paper beats Rock!! Hooray!!"
                 playerScore += 1;
             }
-
         }
         else if (computerSelection === "paper") {
             if (playerSelection === "rock") {
@@ -66,19 +65,26 @@ function round(playerSelection, computerSelection) {
                 outcomeElement.innerHTML ="It's a tie!"
             }
         }
+        scoreElement.innerHTML = "Current Score " + playerScore + " - " + computerScore;
+
+        return(playerScore, computerScore)
     },2000)
+    outcomeElement.innerHTML=""
+    computerChoiceElement.innerHTML=""
 }
 
-function game() {
-    if (computerScore > playerScore) {
-        console.log(`Computer wins the game ${computerScore} to ${playerScore}`)
-    }
-    else if (computerScore == playerScore) {
-        console.log(`It's a draw. Both teams have ${computerScore} points`)
-    }
+function outcome(playerScore, computerScore) {
+    if (computerScore + playerScore >= 5) {    
+        if (computerScore > playerScore) {
+            scoreElement.innerHTML="Computer wins the game "+computerScore + " to " + playerScore
+        }
+        else if (computerScore == playerScore) {
+            scoreElement.innerHTML="It's a draw. Both teams have " + computerScore + " points"
+        }
 
-    else if (playerScore > computerScore) {
-        console.log(`You win the game!! ${playerScore} to ${computerScore}!! Well done!!`)
+        else if (playerScore > computerScore) {
+            scoreElement.innerHTML="You win the game!! " + playerScore + " to " + computerScore + "!! Well done!!"
+        }
     }
 }
 
@@ -90,17 +96,20 @@ function playerPress () {
         playerSelection = "rock";
         computerPlay()
         round(playerSelection, compResult)
+        outcome(playerScore, computerScore)
     });
     paper.addEventListener('click', () => {
         playerSelection = "paper";
         computerPlay()
         console.log(compResult)
         round(playerSelection, compResult)
+        outcome(playerScore, computerScore)
     });
     scissors.addEventListener('click', () => {
         playerSelection = "scissors";
         computerPlay()
         round(playerSelection, compResult)
+        outcome(playerScore, computerScore)  
     })
 }
 computerScore = 0
