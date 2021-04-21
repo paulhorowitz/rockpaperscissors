@@ -4,4 +4,5 @@ Play the classic Rock Paper Scissors school-yard game from the comfort of your o
 
 Play it here https://paulhorowitz.github.io/rockpaperscissors/
 
-Created by Paul Horowitz as part of The Odin Project, an online resource to teach Web Development.
+## Acknowledgement
+Inspired by The Odin Project, a highly recommended guide to going from zero to becoming a full stack developer.
